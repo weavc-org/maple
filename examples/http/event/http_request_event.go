@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	maple "github.com/weavc/maple/v1/pkg"
+	maple "github.com/weavc/maple/pkg"
 )
 
 func NewHttpRequestEvent() *HttpRequestEvent {

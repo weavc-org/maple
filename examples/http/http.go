@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	eve "github.com/weavc/maple/v1/examples/http/event"
-	"github.com/weavc/maple/v1/pkg"
+	eve "github.com/weavc/maple/examples/http/event"
+	"github.com/weavc/maple/pkg"
 )
 
 var (

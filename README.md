@@ -9,7 +9,7 @@ Very simple event library in go.
 - Import the library
   ```go
     import (
-      maple "github.com/weavc/maple/v1/pkg"
+      maple "github.com/weavc/maple/pkg"
     )
   ```
 - Create a new Event 
