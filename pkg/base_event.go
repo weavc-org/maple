@@ -11,7 +11,7 @@ type BaseEvent struct {
 	registered []HandleEventFunc
 }
 
-// Emit an event
+// Return event manifest
 func (h *BaseEvent) Manifest() EventManifest {
 	return *h.manifest
 }
@@ -19,20 +19,17 @@ func (h *BaseEvent) Manifest() EventManifest {
 // Emit an event
 func (h *BaseEvent) Emit(v interface{}) {
 	for _, f := range h.registered {
-		go f(h, v)
+		f(h, v)
 	}
 }
 
-// Register a function to an event
-// This will also register the event if it is not found in the event map
-func (h *BaseEvent) Register(handler HandleEventFunc) error {
-
-	h.registered = append(h.registered, handler)
-
+// Register handlers to an event
+func (h *BaseEvent) Register(handlers ...HandleEventFunc) error {
+	h.registered = append(h.registered, handlers...)
 	return nil
 }
 
-// Take walk through the registered handlers
+// Take walk through the registered event handlers
 func (h *BaseEvent) Walk(handler func(f HandleEventFunc)) {
 	for _, v := range h.registered {
 		handler(v)
