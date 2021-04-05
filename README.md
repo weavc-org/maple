@@ -1,6 +1,11 @@
 # maple
 
 Very simple event library in go. 
+
+[![Go](https://github.com/weavc/maple/actions/workflows/go_build_and_test.yml/badge.svg)](https://github.com/weavc/maple/actions/workflows/go_build_and_test.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/weavc/maple.svg)](https://pkg.go.dev/github.com/weavc/maple)
+
+### Usage
 - Import the library
   ```go
     import (
@@ -36,16 +41,18 @@ The library leaves how the event is handled to the handlers themselves. This all
 - Spawn a go routine
 ```go
 func eventHandler(event pkg.Event, v interface{}) {
-	go func() {
+  go func() {
     // do stuff
-	}()
+  }()
 }
 ```
 - Type the args
 ```go
-s, valid := v.(string)
-if !valid {
-  panic(fmt.Errorf("invalid args provided. Expected %s", "*ApiEventArgs"))
+func eventHandler(event pkg.Event, v interface{}) {
+  s, valid := v.(string)
+  if !valid {
+    panic(fmt.Errorf("invalid args provided. Expected %s", "*ApiEventArgs"))
+  }
 }
 ```
 
