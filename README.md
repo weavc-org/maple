@@ -1,14 +1,15 @@
 # maple
 
 Very simple event library in go. 
-
-- Define your event
+- Import the library
   ```go
-    manifest := maple.EventManifest{Namespace:"maple.events.foo"}
+    import (
+      maple "github.com/weavc/maple/v1/pkg"
+    )
   ```
 - Create a new Event 
   ```go
-    event := NewBasicEvent(manifest)
+    event := maple.NewEvent("maple.events.foo")
   ```
 - Register your handlers
   ```go
