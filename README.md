@@ -1,3 +1,7 @@
+[![Go](https://github.com/weavc/maple/actions/workflows/go_build_and_test.yml/badge.svg)](https://github.com/weavc/maple/actions/workflows/go_build_and_test.yml)
+[![GoDoc](https://img.shields.io/static/v1?label=godoc&message=reference&color=blue)](https://pkg.go.dev/github.com/weavc/maple)
+
+
 # maple
 
 Very simple event library in go. 
