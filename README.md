@@ -43,9 +43,11 @@ func eventHandler(event pkg.Event, v interface{}) {
 ```
 - Type the args
 ```go
-s, valid := v.(string)
-if !valid {
-  panic(fmt.Errorf("invalid args provided. Expected %s", "*ApiEventArgs"))
+func eventHandler(event pkg.Event, v interface{}) {
+  s, valid := v.(string)
+  if !valid {
+    panic(fmt.Errorf("invalid args provided. Expected %s", "*ApiEventArgs"))
+  }
 }
 ```
 
