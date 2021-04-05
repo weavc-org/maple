@@ -36,9 +36,9 @@ The library leaves how the event is handled to the handlers themselves. This all
 - Spawn a go routine
 ```go
 func eventHandler(event pkg.Event, v interface{}) {
-	go func() {
+  go func() {
     // do stuff
-	}()
+  }()
 }
 ```
 - Type the args
