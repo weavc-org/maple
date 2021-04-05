@@ -3,7 +3,7 @@
 Very simple event library in go. 
 
 [![Go](https://github.com/weavc/maple/actions/workflows/go_build_and_test.yml/badge.svg)](https://github.com/weavc/maple/actions/workflows/go_build_and_test.yml)
-[![GoDoc](https://img.shields.io/static/v1?label=godoc&message=reference&color=blue)](https://pkg.go.dev/github.com/weavc/maple)
+[![Go Reference](https://pkg.go.dev/badge/github.com/weavc/maple.svg)](https://pkg.go.dev/github.com/weavc/maple)
 
 ### Usage
 - Import the library
