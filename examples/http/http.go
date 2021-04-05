@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -23,6 +24,7 @@ func main() {
 
 	wrap := &WrapEventMux{handler: mux, requests: make([]*http.Request, 0)}
 
+	fmt.Printf("Registering handlers to event %s...", ev.GetManifest().Namespace)
 	ev.Register(logRequestHandler, wrap.interceptRequestHandler)
 
 	log.Fatal(http.ListenAndServe("0.0.0.0:3000", wrap))
@@ -34,19 +36,19 @@ type WrapEventMux struct {
 }
 
 func (l *WrapEventMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	ev.Emit(&eve.HttpRequestEventArgs{R: r, W: w})
+	ev.Emit(&eve.HttpRequestEventArgs{Req: r, Res: w})
 	l.handler.ServeHTTP(w, r)
 }
 
 func logRequestHandler(event pkg.Event, v interface{}) {
 	go func() {
 		args, _ := v.(*eve.HttpRequestEventArgs)
-		log.Printf("%s %s %v", args.R.Method, args.R.URL.Path, time.Now())
+		log.Printf("%s %s %v", args.Req.Method, args.Req.URL.Path, time.Now())
 	}()
 }
 
 func (l *WrapEventMux) interceptRequestHandler(event pkg.Event, v interface{}) {
 	args, _ := v.(*eve.HttpRequestEventArgs)
 
-	args.W.Header().Set("http-event-intercept", "true")
+	args.Res.Header().Set("http-event-intercept", "true")
 }

@@ -8,10 +8,11 @@ import (
 )
 
 func NewHttpRequestEvent() *HttpRequestEvent {
+	base := maple.NewBaseEvent("maple.examples.http")
+	base.Manifest.Description = "Triggers on incoming HTTP Requests"
+
 	return &HttpRequestEvent{
-		base: maple.NewBasicEvent(&maple.EventManifest{
-			Namespace:   "maple.examples.http",
-			Description: "HTTP Request event"}),
+		base: base,
 	}
 }
 
@@ -21,12 +22,12 @@ type HttpRequestEvent struct {
 }
 
 type HttpRequestEventArgs struct {
-	W http.ResponseWriter
-	R *http.Request
+	Res http.ResponseWriter
+	Req *http.Request
 }
 
-func (h *HttpRequestEvent) Manifest() maple.EventManifest {
-	return h.base.Manifest()
+func (h *HttpRequestEvent) GetManifest() maple.EventManifest {
+	return h.base.GetManifest()
 }
 
 func (h *HttpRequestEvent) Emit(v interface{}) {
@@ -40,8 +41,4 @@ func (h *HttpRequestEvent) Emit(v interface{}) {
 
 func (h *HttpRequestEvent) Register(handlers ...maple.HandleEventFunc) error {
 	return h.base.Register(handlers...)
-}
-
-func (h *HttpRequestEvent) Walk(handler func(f maple.HandleEventFunc)) {
-	h.base.Walk(handler)
 }
