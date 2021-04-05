@@ -22,4 +22,30 @@ Very simple event library in go.
     event.Emit(payload)
   ```
 
+-----
+
+### Handling events
+When you register functions to an event, these must implement our `HandleEventFunc` type.
+```go
+type HandleEventFunc func(event Event, args interface{})
+```
+
+When registered to an event, the function is added to a stack of methods that will be called everytime the event is triggered. When called it will be passed the `Event` structure/interface calling it and the value that is provided when the event is triggered.
+
+The library leaves how the event is handled to the handlers themselves. This allows the handler to decide how it wants to handle the event. i.e. 
+- Spawn a go routine
+```go
+func eventHandler(event pkg.Event, v interface{}) {
+	go func() {
+    // do stuff
+	}()
+}
+```
+- Type the args
+```go
+s, valid := v.(string)
+if !valid {
+  panic(fmt.Errorf("invalid args provided. Expected %s", "*ApiEventArgs"))
+}
+```
 
